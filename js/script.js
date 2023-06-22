@@ -38,41 +38,66 @@ const reset = document.getElementById('reset')
 // argument = the number of max iterations = the number of elements created
 function createBoard(cellNumber){
     let boxArray = []
-    
+    let clickArrCount = []
+    let count = 0;
+    let newRng = generateRng(1, 100, 5)
     for(let i=1; i<=cellNumber; i++){
-
-        const  box = document.createElement('div')
-        box.classList.add('box',`box-${cellNumber}`)  
-        box.innerHTML = i  
+        let singleRNG = newRng[i-1]
+        // console.log('numbers', singleRNG, 'array', newRng)
+        // boxcreation (make a function for it)
+        const  box = document.createElement('div');
+        box.classList.add('box',`box-${cellNumber}`);  
+        box.innerHTML = i;
+        box.setAttribute('index', i)
+        // added index
+        index = parseInt(box.getAttribute('index'))
+        // console.log(index)
         document.querySelector(' main > .my-container .row').append(box);
         box.addEventListener('click',
             function(){
+                // console.log('index clicked', index, i)
                 box.classList.toggle('bkg-color')
-               
+                if(index == singleRNG){
+                    box.classList.toggle('red')
+                }
+
+                if(clickArrCount.includes(i)){
+
+                }
+                else{
+                    clickArrCount.push(i)
+                    console.log('new array', clickArrCount)
+                }
             }
         );
         boxArray.push(box)
-        
+        // 
+   
     };
     
+    // let boxArrayWithoutBomb = boxArray
     let rng = generateRng(1, 100, 5)
-     
     
-    let boxArrayWithoutBomb = boxArray
-    for(let i=0; i<5; i++){
-        let rngValue = rng[i]  
-        console.log('array', rng)
-        // boxArray[rngValue-1].classList.add('red')
-        // boxArrayWithoutBomb.splice(rngValue,1)
-        boxArray[rngValue-1].addEventListener('click',
-            function(){
-                this.classList.toggle('red')
+    // create function for number of bombs (5)
+    // for(let i=0; i<5; i++){
+    //     let rngValue = rng[i]  
+    //     console.log('array', rng)
+    //     // boxArray[rngValue-1].classList.add('red')
+    //     let scope = 0
+    //     boxArray[rngValue-1].addEventListener('click',
+    //         function(){
+    //             this.classList.toggle('red')
+                
+    //             scope=1
+    //             if (scope == 1){
+    //                 console.log('lost')
+    //             }
                
-            }
-        );
+    //         }
+    //     );
         
-    }
-   
+    // }
+    
 };
 
 // function that creates the single element
