@@ -40,7 +40,7 @@ function createBoard(cellNumber){
     let boxArray = []
     let clickArrCount = []
     // let count = 0;
-    let newRng = generateRng(1, 100, 5)
+    let newRng = generateRng(1, 100, 16)
     for(let i=1; i<=cellNumber; i++){
         let singleRNG = newRng[i-1]
         console.log('numbers', singleRNG, 'array', newRng)
@@ -69,7 +69,7 @@ function createBoard(cellNumber){
                 }
                 if(newRng.includes(index)){
                     box.classList.toggle('red')
-                    console.log('you lost', clickArrCount.length)
+                    console.log('you lost', clickArrCount.length-1)
                     alert(`you lost with ${clickArrCount.length}`)
                     document.querySelector('.row').innerHTML= ''
                     
