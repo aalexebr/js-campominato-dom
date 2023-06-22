@@ -39,35 +39,46 @@ const reset = document.getElementById('reset')
 function createBoard(cellNumber){
     let boxArray = []
     let clickArrCount = []
-    let count = 0;
+    // let count = 0;
     let newRng = generateRng(1, 100, 5)
     for(let i=1; i<=cellNumber; i++){
         let singleRNG = newRng[i-1]
-        // console.log('numbers', singleRNG, 'array', newRng)
+        console.log('numbers', singleRNG, 'array', newRng)
         // boxcreation (make a function for it)
         const  box = document.createElement('div');
         box.classList.add('box',`box-${cellNumber}`);  
         box.innerHTML = i;
         box.setAttribute('index', i)
         // added index
-        index = parseInt(box.getAttribute('index'))
+        
         // console.log(index)
         document.querySelector(' main > .my-container .row').append(box);
         box.addEventListener('click',
             function(){
+                index = parseInt(box.getAttribute('index'))
                 // console.log('index clicked', index, i)
-                box.classList.toggle('bkg-color')
-                if(index == singleRNG){
-                    box.classList.toggle('red')
-                }
-
+                // console.log(index, singleRNG)
+                
                 if(clickArrCount.includes(i)){
 
                 }
                 else{
                     clickArrCount.push(i)
-                    console.log('new array', clickArrCount)
+                    console.log('new array', clickArrCount, 'length', clickArrCount.length)
+                    document.getElementById('points').innerHTML = clickArrCount.length
                 }
+                if(newRng.includes(index)){
+                    box.classList.toggle('red')
+                    console.log('you lost', clickArrCount.length)
+                    alert(`you lost with ${clickArrCount.length}`)
+                    document.querySelector('.row').innerHTML= ''
+                    
+                }
+                else{
+                    box.classList.toggle('bkg-color')
+
+                }
+                
             }
         );
         boxArray.push(box)
