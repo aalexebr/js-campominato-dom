@@ -39,38 +39,36 @@ const reset = document.getElementById('reset')
 function createBoard(cellNumber){
     let boxArray = []
     let clickArrCount = []
-    // let count = 0;
-    let newRng = generateRng(1, 100, 16)
+    let rng = generateRng(1, cellNumber, 16)
+    console.log('array', rng)
     for(let i=1; i<=cellNumber; i++){
-        let singleRNG = newRng[i-1]
-        console.log('numbers', singleRNG, 'array', newRng)
-        // boxcreation (make a function for it)
+        // boxcreation 
         const  box = document.createElement('div');
         box.classList.add('box',`box-${cellNumber}`);  
         box.innerHTML = i;
+        // index give index attribute to each box with iteration number
         box.setAttribute('index', i)
         // added index
         
-        // console.log(index)
         document.querySelector(' main > .my-container .row').append(box);
         box.addEventListener('click',
             function(){
+                // get the Number object of each box and compare to the index of the array with includes.
                 index = parseInt(box.getAttribute('index'))
-                // console.log('index clicked', index, i)
-                // console.log(index, singleRNG)
-                
+
                 if(clickArrCount.includes(i)){
 
                 }
                 else{
                     clickArrCount.push(i)
                     console.log('new array', clickArrCount, 'length', clickArrCount.length)
-                    document.getElementById('points').innerHTML = clickArrCount.length
+                    document.getElementById('points').innerHTML = `POINTS =${clickArrCount.length}`
                 }
-                if(newRng.includes(index)){
+                if(rng.includes(index)){
                     box.classList.toggle('red')
                     console.log('you lost', clickArrCount.length-1)
-                    alert(`you lost with ${clickArrCount.length}`)
+                    alert(`you lost with ${clickArrCount.length-1}`)
+                    document.getElementById('points').innerHTML = `POINTS =${clickArrCount.length-1}`
                     document.querySelector('.row').innerHTML= ''
                     
                 }
@@ -85,9 +83,9 @@ function createBoard(cellNumber){
         // 
    
     };
-    
+    // WRONG SOLUTION creating a second cycle with indexes of both arrays
     // let boxArrayWithoutBomb = boxArray
-    let rng = generateRng(1, 100, 5)
+    // let rng = generateRng(1, 100, 5)
     
     // create function for number of bombs (5)
     // for(let i=0; i<5; i++){
@@ -111,19 +109,8 @@ function createBoard(cellNumber){
     
 };
 
-// function that creates the single element
-// function createBox(){
-//     const box = document.createElement('div')
-//     box.classList.add('box','box-100')  
-//     box.innerHTML = i  
-//     box.addEventListener('click',
-//             function(){
-//                 box.classList.toggle('bkg-color')
-//             }
-//         );
 
-//     return box;
-// };
+
 
 
 // FUNCTION FOR RANDOM UNIQUE NUMBERS
@@ -140,14 +127,3 @@ function generateRng(min, max, howMany){
     }
     return arr
 }
-// let rng = generateRng(1, 20, 10)
-let rngOfBoxNumber = generateRng (1, 100, 100)
-// console.log('full array',rng, 'index of single',rng[0]);
-
-// for (let i=1; i<=20; i++){
-//     console.log(rng[i-1] );
-// }
-
-// for(let i=1; i<=100; i++){
-//     console.log('array', rng,'index 0',rng[i])
-// }
